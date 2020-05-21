@@ -1,0 +1,410 @@
+﻿<syncfusion:ChromelessWindow x:Class="HideTabHedaer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		Icon="sfgrid.ico" WindowState="Normal" WindowStartupLocation="CenterScreen"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        Title="TabControlExt" Height="350" Width="500">
+    <syncfusion:ChromelessWindow.Resources>
+        <Style x:Key="TabSplitterStyle1" TargetType="{x:Type syncfusion:TabSplitter}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type syncfusion:TabSplitter}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="0,2,0,0">
+                            <Grid Background="Transparent" ClipToBounds="False" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="Local">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Name="ColumnDefinition0"/>
+                                    <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
+                                    <RowDefinition x:Name="RowDefinition1" Height="*"/>
+                                </Grid.RowDefinitions>
+                                <syncfusion:LayoutPanel x:Name="HeaderPanel" Grid.Column="0" Focusable="False" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Top" Panel.ZIndex="1">
+                                    <syncfusion:TabPanelAdv x:Name="PART_TabPanel" DockPanel.Dock="Right" Focusable="False" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                        <syncfusion:TabPanelAdv.Style>
+                                            <Style TargetType="{x:Type syncfusion:TabPanelAdv}">
+                                                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type syncfusion:TabPanelAdv}">
+                                                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}" HorizontalAlignment="Left" Padding="{TemplateBinding Padding}" VerticalAlignment="Top">
+                                                                <DockPanel LastChildFill="True">
+                                                                    <Border x:Name="BottomBorder" Background="Transparent" DockPanel.Dock="Bottom" Height="0"/>
+                                                                    <ContentPresenter x:Name="PART_CustomItems" AllowDrop="False" Content="{Binding TabPanelItem, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:TabControlExt}}}" ContentSource="TabPanelItem" DockPanel.Dock="Right" MaxHeight="{Binding ActualHeight, ElementName=PART_TabItems}" Margin="2,0,0,0"/>
+                                                                    <ToggleButton x:Name="PART_CloseButton" AllowDrop="False" DockPanel.Dock="Right" Focusable="False" Height="15" Width="15" Visibility="Collapsed">
+                                                                        <ToggleButton.Command>
+                                                                            <RoutedCommand/>
+                                                                        </ToggleButton.Command>
+                                                                        <ToggleButton.Template>
+                                                                            <ControlTemplate TargetType="{x:Type ButtonBase}">
+                                                                                <syncfusion:Border3D x:Name="brdBack" BorderBrush="Transparent" BorderThickness="1" Margin="1">
+                                                                                    <Path x:Name="pathButton" Data="M109,51L216,142 M215,52L109,142" HorizontalAlignment="Center" Height="8" Stretch="Fill" SnapsToDevicePixels="False" Stroke="Black" StrokeThickness="1.5" VerticalAlignment="Center" Width="9"/>
+                                                                                </syncfusion:Border3D>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="IsPressed" Value="True">
+                                                                                        <Setter Property="IsInverted" TargetName="brdBack" Value="True"/>
+                                                                                        <Setter Property="Content" Value="1,1,-1,-1"/>
+                                                                                    </Trigger>
+                                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                                        <Setter Property="Background" TargetName="brdBack" Value="#FFCEEDFA"/>
+                                                                                        <Setter Property="BorderBrush" TargetName="brdBack" Value="#FF3E89F9"/>
+                                                                                        <Setter Property="Stroke" TargetName="pathButton" Value="Black"/>
+                                                                                        <Setter Property="Fill" TargetName="pathButton" Value="Black"/>
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </ToggleButton.Template>
+                                                                    </ToggleButton>
+                                                                    <ToggleButton x:Name="PART_MenuButton" AllowDrop="False" DockPanel.Dock="Right" Focusable="False" Height="15" Width="15">
+                                                                        <ToggleButton.Command>
+                                                                            <RoutedCommand/>
+                                                                        </ToggleButton.Command>
+                                                                        <ToggleButton.Template>
+                                                                            <ControlTemplate TargetType="{x:Type ButtonBase}">
+                                                                                <syncfusion:Border3D x:Name="brdBack" BorderBrush="Transparent" BorderThickness="1" Margin="1">
+                                                                                    <Path x:Name="pathButton" Fill="Black" HorizontalAlignment="Center" Height="8" Stretch="Fill" SnapsToDevicePixels="False" Stroke="Black" StrokeThickness="1.5" VerticalAlignment="Center" Width="9">
+                                                                                        <Path.Data>
+                                                                                            <GeometryGroup>
+                                                                                                <LineGeometry EndPoint="9,7" StartPoint="4,7"/>
+                                                                                                <PathGeometry Figures="M5,10 L8,10 L6.5,12.5 z"/>
+                                                                                            </GeometryGroup>
+                                                                                        </Path.Data>
+                                                                                    </Path>
+                                                                                </syncfusion:Border3D>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <DataTrigger Binding="{Binding IsAllItemsVisible, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                                                        <Setter Property="Data" TargetName="pathButton" Value="M1,4L4.5,7 8,4z"/>
+                                                                                        <Setter Property="Stretch" TargetName="pathButton" Value="None"/>
+                                                                                    </DataTrigger>
+                                                                                    <Trigger Property="IsPressed" Value="True">
+                                                                                        <Setter Property="IsInverted" TargetName="brdBack" Value="True"/>
+                                                                                        <Setter Property="Content" Value="1,1,-1,-1"/>
+                                                                                    </Trigger>
+                                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                                        <Setter Property="Background" TargetName="brdBack" Value="#FFCEEDFA"/>
+                                                                                        <Setter Property="BorderBrush" TargetName="brdBack" Value="#FF3E89F9"/>
+                                                                                        <Setter Property="Stroke" TargetName="pathButton" Value="Black"/>
+                                                                                        <Setter Property="Fill" TargetName="pathButton" Value="Black"/>
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </ToggleButton.Template>
+                                                                        <ToggleButton.Visibility>
+                                                                            <Binding Mode="OneWay" Path="ShowTabListContextMenu" RelativeSource="{RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:TabControlExt}}">
+                                                                                <Binding.Converter>
+                                                                                    <syncfusion:BooleanToVisibilityConverterEx/>
+                                                                                </Binding.Converter>
+                                                                            </Binding>
+                                                                        </ToggleButton.Visibility>
+                                                                    </ToggleButton>
+                                                                    <ContentPresenter x:Name="PART_TabItems" Content="{TemplateBinding Content}" ContentSource="TabItems" DockPanel.Dock="Right"/>
+                                                                </DockPanel>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Bottom">
+                                                                    <Setter Property="LayoutTransform" TargetName="PART_CustomItems">
+                                                                        <Setter.Value>
+                                                                            <RotateTransform Angle="-180"/>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                    <Setter Property="LayoutTransform" TargetName="PART_CloseButton">
+                                                                        <Setter.Value>
+                                                                            <RotateTransform Angle="-180"/>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                    <Setter Property="LayoutTransform" TargetName="PART_MenuButton">
+                                                                        <Setter.Value>
+                                                                            <RotateTransform Angle="-180"/>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding IsAllTabsClosed, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:TabControlExt}}}" Value="True">     
+                                                                    <Setter Property="Visibility" TargetName="PART_MenuButton" Value="Hidden"/>
+                                                                    <Setter Property="Height" TargetName="BottomBorder" Value="0"/>
+                                                                </DataTrigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </syncfusion:TabPanelAdv.Style>
+                                        <syncfusion:TabSplitterItemPanel x:Name="PART_TabLayoutPanel" AllowDrop="False" ClipToBounds="True" HorizontalAlignment="Left" IsItemsHost="True" Margin="0,0,2,0" KeyboardNavigation.TabIndex="1" VerticalAlignment="Top"/>
+                                    </syncfusion:TabPanelAdv>
+                                </syncfusion:LayoutPanel>
+                                <syncfusion:Border3D x:Name="ContentPanel" AllowDrop="False" BorderBrush="#FF69A1BF" BorderThickness="1" Background="#FFD2E6FA" Grid.Column="0" CornerRadius="2" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
+                                    <Border x:Name="PART_ContentPanelBorder" BorderBrush="#FF69A1BF" BorderThickness="0" Background="#FFD2E6FA" CornerRadius="2">
+                                        <Border x:Name="PART_ContentPanelInnerBorder" BorderBrush="#FF69A1BF" BorderThickness="1" Background="{TemplateBinding Background}" CornerRadius="2" Margin="3">
+                                            <Grid x:Name="ResizedContentGrid">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <syncfusion:LayoutPanel x:Name="PART_TopPanel" Grid.Column="1" Grid.Row="0">
+                                                    <ScrollContentPresenter x:Name="PART_TopScrollContent" CanHorizontallyScroll="False" CanVerticallyScroll="False" Content="{TemplateBinding TopSelectedContent}" ContentSource="TopSelectedContent" Margin="{Binding Padding, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:TabSplitter}}}"/>
+                                                </syncfusion:LayoutPanel>
+                                                <syncfusion:CustomGridSplitter x:Name="PART_Splitter" Grid.Column="1" Grid.Row="1" ResizeDirection="Rows" ShowsPreview="True" Panel.ZIndex="1">
+                                                    <syncfusion:CustomGridSplitter.Style>
+                                                        <Style TargetType="{x:Type syncfusion:CustomGridSplitter}">
+                                                            <Setter Property="Height" Value="22"/>
+                                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="{x:Type syncfusion:CustomGridSplitter}">
+                                                                        <syncfusion:LayoutPanel x:Name="PART_SplitHeaderPanel" Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:CustomGridSplitter}}}" Panel.ZIndex="1">
+                                                                            <Border x:Name="PART_SplitBorder" BorderBrush="#FFA0A0A0" BorderThickness="1">
+                                                                                <Border.Background>
+                                                                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                                                        <GradientStop Color="#FFBEBCC0" Offset="0"/>
+                                                                                        <GradientStop Color="#FFEFF2FF" Offset="0.2"/>
+                                                                                        <GradientStop Color="#FFF0EDF4" Offset="0.7"/>
+                                                                                        <GradientStop Color="#FFF9F4FF" Offset="1"/>
+                                                                                    </LinearGradientBrush>
+                                                                                </Border.Background>
+                                                                                <syncfusion:SplitHeaderPanel>
+                                                                                    <ItemsControl x:Name="PART_TopPages" DockPanel.Dock="Left">
+                                                                                        <ItemsControl.ItemsPanel>
+                                                                                            <ItemsPanelTemplate>
+                                                                                                <syncfusion:PagesLayoutPanel ClipToBounds="True" IsItemsHost="True">
+                                                                                                    <syncfusion:PagesLayoutPanel.LayoutTransform>
+                                                                                                        <RotateTransform Angle="-180"/>
+                                                                                                    </syncfusion:PagesLayoutPanel.LayoutTransform>
+                                                                                                </syncfusion:PagesLayoutPanel>
+                                                                                            </ItemsPanelTemplate>
+                                                                                        </ItemsControl.ItemsPanel>
+                                                                                    </ItemsControl>
+                                                                                    <Button x:Name="PART_SplitButton" DockPanel.Dock="Left" ToolTip="{Binding SwapPanes}">
+                                                                                        <Button.Style>
+                                                                                            <Style TargetType="{x:Type Button}">
+                                                                                                <Setter Property="Template">
+                                                                                                    <Setter.Value>
+                                                                                                        <ControlTemplate TargetType="{x:Type Button}">
+                                                                                                            <Border x:Name="PART_Border" BorderBrush="Transparent" BorderThickness="1" Background="Transparent" CornerRadius="0" HorizontalAlignment="Center" Height="15" Margin="1,0" SnapsToDevicePixels="True" VerticalAlignment="Center" Width="15">
+                                                                                                                <Canvas Height="13" SnapsToDevicePixels="True" Width="13">
+                                                                                                                    <Path Data="M3,11L3,5" Fill="Black" HorizontalAlignment="Center" Stroke="Black" VerticalAlignment="Center"/>
+                                                                                                                    <Path Data="M1,5L4.5,5 3,3 1.5,5" Fill="Black" HorizontalAlignment="Center" Stroke="Black" VerticalAlignment="Center"/>
+                                                                                                                    <Path Data="M9,8L9,1" Fill="Black" HorizontalAlignment="Center" Stroke="Black" VerticalAlignment="Center"/>
+                                                                                                                    <Path Data="M7,8L10.5,8 9,10 7.5,8" Fill="Black" HorizontalAlignment="Center" Stroke="Black" VerticalAlignment="Center"/>
+                                                                                                                </Canvas>
+                                                                                                            </Border>
+                                                                                                            <ControlTemplate.Triggers>
+                                                                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                                                                    <Setter Property="Background" TargetName="PART_Border" Value="#FFC1D2EE"/>
+                                                                                                                    <Setter Property="BorderBrush" TargetName="PART_Border" Value="#FF3E89F9"/>
+                                                                                                                </Trigger>
+                                                                                                                <Trigger Property="IsPressed" Value="True">
+                                                                                                                    <Setter Property="Background" TargetName="PART_Border" Value="#FF98B5E2"/>
+                                                                                                                    <Setter Property="BorderBrush" TargetName="PART_Border" Value="#FF316AC5"/>
+                                                                                                                </Trigger>
+                                                                                                            </ControlTemplate.Triggers>
+                                                                                                        </ControlTemplate>
+                                                                                                    </Setter.Value>
+                                                                                                </Setter>
+                                                                                            </Style>
+                                                                                        </Button.Style>
+                                                                                    </Button>
+                                                                                    <ItemsControl x:Name="PART_BottomPages" DockPanel.Dock="Left">
+                                                                                        <ItemsControl.ItemsPanel>
+                                                                                            <ItemsPanelTemplate>
+                                                                                                <syncfusion:PagesLayoutPanel ClipToBounds="True" IsItemsHost="True"/>
+                                                                                            </ItemsPanelTemplate>
+                                                                                        </ItemsControl.ItemsPanel>
+                                                                                    </ItemsControl>
+                                                                                    <DockPanel x:Name="PART_SplitterMunuPanel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,1,0,0">
+                                                                                        <Button x:Name="PART_VerticalButton" ToolTip="{Binding VerticalSplit}">
+                                                                                            <Button.Style>
+                                                                                                <Style TargetType="{x:Type Button}">
+                                                                                                    <Setter Property="Background" Value="Transparent"/>
+                                                                                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                                                                                    <Setter Property="BorderThickness" Value="1"/>
+                                                                                                    <Setter Property="Template">
+                                                                                                        <Setter.Value>
+                                                                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                                                                <Border x:Name="PART_Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="0" HorizontalAlignment="Center" Height="15" Margin="0" SnapsToDevicePixels="True" VerticalAlignment="Center" Width="15">
+                                                                                                                    <Canvas HorizontalAlignment="Center" Height="11" SnapsToDevicePixels="True" VerticalAlignment="Center" Width="11">
+                                                                                                                        <Rectangle Height="11" Stroke="Black" Width="11"/>
+                                                                                                                        <Path x:Name="VericalLine" Data="M5.5,8.8L5.5,2.5" Fill="Black" HorizontalAlignment="Center" Stroke="Black" VerticalAlignment="Center"/>
+                                                                                                                    </Canvas>
+                                                                                                                </Border>
+                                                                                                                <ControlTemplate.Triggers>
+                                                                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                                                                        <Setter Property="Background" TargetName="PART_Border" Value="#FFC1D2EE"/>
+                                                                                                                        <Setter Property="BorderBrush" TargetName="PART_Border" Value="#FF3E89F9"/>
+                                                                                                                    </Trigger>
+                                                                                                                    <Trigger Property="IsPressed" Value="True">
+                                                                                                                        <Setter Property="Background" TargetName="PART_Border" Value="#FF98B5E2"/>
+                                                                                                                        <Setter Property="BorderBrush" TargetName="PART_Border" Value="#FF316AC5"/>
+                                                                                                                    </Trigger>
+                                                                                                                </ControlTemplate.Triggers>
+                                                                                                            </ControlTemplate>
+                                                                                                        </Setter.Value>
+                                                                                                    </Setter>
+                                                                                                </Style>
+                                                                                            </Button.Style>
+                                                                                        </Button>
+                                                                                        <Button x:Name="PART_HorizontalButton" BorderThickness="1" ToolTip="{Binding HorizontalSplit}">
+                                                                                            <Button.Style>
+                                                                                                <Style TargetType="{x:Type Button}">
+                                                                                                    <Setter Property="Background" Value="Transparent"/>
+                                                                                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                                                                                    <Setter Property="BorderThickness" Value="1"/>
+                                                                                                    <Setter Property="Template">
+                                                                                                        <Setter.Value>
+                                                                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                                                                <Border x:Name="PART_Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="0" HorizontalAlignment="Center" Height="15" Margin="0" SnapsToDevicePixels="True" VerticalAlignment="Center" Width="15">
+                                                                                                                    <Canvas HorizontalAlignment="Center" Height="11" SnapsToDevicePixels="True" VerticalAlignment="Center" Width="11">
+                                                                                                                        <Rectangle Height="11" Stroke="Black" Width="11"/>
+                                                                                                                        <Path Data="M2,5.5L9,5.5" Fill="Black" HorizontalAlignment="Center" Stroke="Black" VerticalAlignment="Center"/>
+                                                                                                                    </Canvas>
+                                                                                                                </Border>
+                                                                                                                <ControlTemplate.Triggers>
+                                                                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                                                                        <Setter Property="Background" TargetName="PART_Border" Value="#FFC1D2EE"/>
+                                                                                                                        <Setter Property="BorderBrush" TargetName="PART_Border" Value="#FF3E89F9"/>
+                                                                                                                    </Trigger>
+                                                                                                                    <Trigger Property="IsPressed" Value="True">
+                                                                                                                        <Setter Property="Background" TargetName="PART_Border" Value="#FF98B5E2"/>
+                                                                                                                        <Setter Property="BorderBrush" TargetName="PART_Border" Value="#FF316AC5"/>
+                                                                                                                    </Trigger>
+                                                                                                                </ControlTemplate.Triggers>
+                                                                                                            </ControlTemplate>
+                                                                                                        </Setter.Value>
+                                                                                                    </Setter>
+                                                                                                </Style>
+                                                                                            </Button.Style>
+                                                                                        </Button>
+                                                                                        <ToggleButton x:Name="PART_Expand_ColapseButtons" ToolTip="Collapse Pane">
+                                                                                            <ToggleButton.Command>
+                                                                                                <RoutedCommand/>
+                                                                                            </ToggleButton.Command>
+                                                                                            <ToggleButton.Template>
+                                                                                                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                                                                                                    <Border x:Name="PART_Border" BorderBrush="Transparent" BorderThickness="1" Background="Transparent" CornerRadius="0" HorizontalAlignment="Stretch" Height="15" Margin="0" SnapsToDevicePixels="True" VerticalAlignment="Stretch" Width="15">
+                                                                                                        <Canvas HorizontalAlignment="Center" Height="11" SnapsToDevicePixels="True" VerticalAlignment="Center" Width="11">
+                                                                                                            <Rectangle Height="11" Stroke="Black" Width="11"/>
+                                                                                                            <Polyline Points="2,5 5.5,8.5 8.5,5" Stroke="Black" StrokeThickness="1.3"/>
+                                                                                                            <Polyline Points="2.2,2.2 5.5,5.5 8.5,2.2" Stroke="Black" StrokeThickness="1.3"/>
+                                                                                                        </Canvas>
+                                                                                                    </Border>
+                                                                                                    <ControlTemplate.Triggers>
+                                                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                                                            <Setter Property="Background" TargetName="PART_Border" Value="#FFC1D2EE"/>
+                                                                                                            <Setter Property="BorderBrush" TargetName="PART_Border" Value="#FF3E89F9"/>
+                                                                                                        </Trigger>
+                                                                                                        <Trigger Property="IsPressed" Value="True">
+                                                                                                            <Setter Property="Background" TargetName="PART_Border" Value="#FF98B5E2"/>
+                                                                                                            <Setter Property="BorderBrush" TargetName="PART_Border" Value="#FF316AC5"/>
+                                                                                                        </Trigger>
+                                                                                                    </ControlTemplate.Triggers>
+                                                                                                </ControlTemplate>
+                                                                                            </ToggleButton.Template>
+                                                                                        </ToggleButton>
+                                                                                    </DockPanel>
+                                                                                    <Border x:Name="PART_HorizContainerBorder" HorizontalAlignment="Left">
+                                                                                        <Border x:Name="ResizedOptionLine" BorderBrush="Gray" BorderThickness="0,1" HorizontalAlignment="Center" Height="4" Width="40"/>
+                                                                                    </Border>
+                                                                                </syncfusion:SplitHeaderPanel>
+                                                                            </Border>
+                                                                            <Canvas x:Name="DragPreviewLine" Height="3" Visibility="Collapsed">
+                                                                                <Line x:Name="Line1" Fill="Black" HorizontalAlignment="Stretch" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 1" X2="{TemplateBinding ActualWidth}"/>
+                                                                                <Line x:Name="Line2" Fill="Black" HorizontalAlignment="Stretch" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 1" X1="1" X2="{TemplateBinding ActualWidth}" Y1="1" Y2="1"/>
+                                                                                <Line x:Name="Line3" Fill="Black" HorizontalAlignment="Stretch" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 1" X2="{TemplateBinding ActualWidth}" Y1="2" Y2="2"/>
+                                                                            </Canvas>
+                                                                        </syncfusion:LayoutPanel>
+                                                                        <ControlTemplate.Triggers>
+                                                                            <Trigger Property="ResizeDirection" Value="Columns">
+                                                                                <Setter Property="LayoutTransform" TargetName="PART_SplitHeaderPanel">
+                                                                                    <Setter.Value>
+                                                                                        <RotateTransform Angle="90"/>
+                                                                                    </Setter.Value>
+                                                                                </Setter>
+                                                                                <Setter Property="X2" TargetName="Line1" Value="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:CustomGridSplitter}}}"/>
+                                                                                <Setter Property="X2" TargetName="Line2" Value="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:CustomGridSplitter}}}"/>
+                                                                                <Setter Property="X2" TargetName="Line3" Value="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:CustomGridSplitter}}}"/>
+                                                                                <Setter Property="LayoutTransform" TargetName="PART_VerticalButton">
+                                                                                    <Setter.Value>
+                                                                                        <RotateTransform Angle="90"/>
+                                                                                    </Setter.Value>
+                                                                                </Setter>
+                                                                                <Setter Property="BorderBrush" TargetName="PART_VerticalButton" Value="#FF3E89F9"/>
+                                                                                <Setter Property="BorderBrush" TargetName="PART_HorizontalButton" Value="Transparent"/>
+                                                                                <Setter Property="LayoutTransform" TargetName="PART_HorizontalButton">
+                                                                                    <Setter.Value>
+                                                                                        <RotateTransform Angle="90"/>
+                                                                                    </Setter.Value>
+                                                                                </Setter>
+                                                                            </Trigger>
+                                                                        </ControlTemplate.Triggers>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </syncfusion:CustomGridSplitter.Style>
+                                                </syncfusion:CustomGridSplitter>
+                                                <syncfusion:LayoutPanel x:Name="PART_BottomPanel" Grid.Column="1" Grid.Row="2">
+                                                    <ScrollContentPresenter x:Name="PART_BottomScrollContent" CanHorizontallyScroll="False" CanVerticallyScroll="False" Content="{TemplateBinding BottomSelectedContent}" ContentSource="BottomSelectedContent" Margin="{Binding Padding, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:TabSplitter}}}"/>
+                                                </syncfusion:LayoutPanel>
+                                            </Grid>
+                                        </Border>
+                                    </Border>
+                                </syncfusion:Border3D>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding SelectedItem.(syncfusion:TabSplitterItem.Orientation), RelativeSource={RelativeSource Self}}" Value="Vertical">
+                                <Setter Property="Grid.Row" TargetName="PART_TopPanel" Value="1"/>
+                                <Setter Property="Grid.Column" TargetName="PART_TopPanel" Value="0"/>
+                                <Setter Property="Grid.Row" TargetName="PART_Splitter" Value="1"/>
+                                <Setter Property="Grid.Column" TargetName="PART_Splitter" Value="1"/>
+                                <Setter Property="Grid.Row" TargetName="PART_BottomPanel" Value="1"/>
+                                <Setter Property="Grid.Column" TargetName="PART_BottomPanel" Value="2"/>
+                                <Setter Property="ResizeDirection" TargetName="PART_Splitter" Value="Columns"/>
+                                <Setter Property="Grid.ColumnSpan" TargetName="PART_Splitter" Value="1"/>
+                            </DataTrigger>
+                            <Trigger Property="HasItems" Value="False">
+                                <Setter Property="Visibility" TargetName="PART_Splitter" Value="Collapsed"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="AllowDrop" Value="False"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="MinHeight" Value="150"/>
+            <Setter Property="SelectedBackground" Value="White"/>
+            <Setter Property="SelectedForeground" Value="Black"/>
+            <Setter Property="MouseOverBackground">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFCBD2EF" Offset="0"/>
+                        <GradientStop Color="White" Offset="0.9"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="MouseOverForeground" Value="Black"/>
+        </Style>
+    </syncfusion:ChromelessWindow.Resources>
+    <Grid>
+        <syncfusion:TabSplitter Name="Tabsplit" HideHeaderOnSingleChild="True" Style="{DynamicResource TabSplitterStyle1}">
+            <syncfusion:TabSplitterItem Header="tab1">
+                <syncfusion:TabSplitterItem.TopPanelItems>
+                    <syncfusion:SplitterPage Header="Split1"></syncfusion:SplitterPage>
+                </syncfusion:TabSplitterItem.TopPanelItems>
+                <syncfusion:TabSplitterItem.BottomPanelItems>
+                    <syncfusion:SplitterPage Header="Split2"></syncfusion:SplitterPage>
+                </syncfusion:TabSplitterItem.BottomPanelItems>
+            </syncfusion:TabSplitterItem>
+        </syncfusion:TabSplitter>
+    </Grid>
+</syncfusion:ChromelessWindow>
