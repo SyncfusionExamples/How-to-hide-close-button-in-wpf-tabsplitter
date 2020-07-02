@@ -1,9 +1,13 @@
-﻿<syncfusion:ChromelessWindow x:Class="HideTabHedaer.MainWindow"
+﻿<Window x:Class="HideTabSplitterCloseButton.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-		Icon="sfgrid.ico" WindowState="Normal" WindowStartupLocation="CenterScreen"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        Title="TabControlExt" Height="350" Width="500">
-    <syncfusion:ChromelessWindow.Resources>
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HideTabSplitterCloseButton"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        mc:Ignorable="d"
+        Title="TabSplitter" Height="350" Width="400">
+    <Window.Resources>
         <Style x:Key="TabSplitterStyle1" TargetType="{x:Type syncfusion:TabSplitter}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -30,7 +34,7 @@
                                                                 <DockPanel LastChildFill="True">
                                                                     <Border x:Name="BottomBorder" Background="Transparent" DockPanel.Dock="Bottom" Height="0"/>
                                                                     <ContentPresenter x:Name="PART_CustomItems" AllowDrop="False" Content="{Binding TabPanelItem, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:TabControlExt}}}" ContentSource="TabPanelItem" DockPanel.Dock="Right" MaxHeight="{Binding ActualHeight, ElementName=PART_TabItems}" Margin="2,0,0,0"/>
-                                                                    <ToggleButton x:Name="PART_CloseButton" AllowDrop="False" DockPanel.Dock="Right" Focusable="False" Height="15" Width="15" Visibility="Collapsed">
+                                                                    <ToggleButton x:Name="PART_CloseButton" AllowDrop="False" DockPanel.Dock="Right" Focusable="False" Height="15" Visibility="Collapsed" Width="15">
                                                                         <ToggleButton.Command>
                                                                             <RoutedCommand/>
                                                                         </ToggleButton.Command>
@@ -54,11 +58,11 @@
                                                                             </ControlTemplate>
                                                                         </ToggleButton.Template>
                                                                     </ToggleButton>
-                                                                    <ToggleButton x:Name="PART_MenuButton" AllowDrop="False" DockPanel.Dock="Right" Focusable="False" Height="15" Width="15">
-                                                                        <ToggleButton.Command>
+                                                                    <Button x:Name="PART_MenuButton" AllowDrop="False" DockPanel.Dock="Right" Focusable="False" Height="15" Visibility="Visible" Width="15">
+                                                                        <Button.Command>
                                                                             <RoutedCommand/>
-                                                                        </ToggleButton.Command>
-                                                                        <ToggleButton.Template>
+                                                                        </Button.Command>
+                                                                        <Button.Template>
                                                                             <ControlTemplate TargetType="{x:Type ButtonBase}">
                                                                                 <syncfusion:Border3D x:Name="brdBack" BorderBrush="Transparent" BorderThickness="1" Margin="1">
                                                                                     <Path x:Name="pathButton" Fill="Black" HorizontalAlignment="Center" Height="8" Stretch="Fill" SnapsToDevicePixels="False" Stroke="Black" StrokeThickness="1.5" VerticalAlignment="Center" Width="9">
@@ -87,41 +91,11 @@
                                                                                     </Trigger>
                                                                                 </ControlTemplate.Triggers>
                                                                             </ControlTemplate>
-                                                                        </ToggleButton.Template>
-                                                                        <ToggleButton.Visibility>
-                                                                            <Binding Mode="OneWay" Path="ShowTabListContextMenu" RelativeSource="{RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:TabControlExt}}">
-                                                                                <Binding.Converter>
-                                                                                    <syncfusion:BooleanToVisibilityConverterEx/>
-                                                                                </Binding.Converter>
-                                                                            </Binding>
-                                                                        </ToggleButton.Visibility>
-                                                                    </ToggleButton>
+                                                                        </Button.Template>
+                                                                    </Button>
                                                                     <ContentPresenter x:Name="PART_TabItems" Content="{TemplateBinding Content}" ContentSource="TabItems" DockPanel.Dock="Right"/>
                                                                 </DockPanel>
                                                             </Border>
-                                                            <ControlTemplate.Triggers>
-                                                                <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Bottom">
-                                                                    <Setter Property="LayoutTransform" TargetName="PART_CustomItems">
-                                                                        <Setter.Value>
-                                                                            <RotateTransform Angle="-180"/>
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                    <Setter Property="LayoutTransform" TargetName="PART_CloseButton">
-                                                                        <Setter.Value>
-                                                                            <RotateTransform Angle="-180"/>
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                    <Setter Property="LayoutTransform" TargetName="PART_MenuButton">
-                                                                        <Setter.Value>
-                                                                            <RotateTransform Angle="-180"/>
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                </DataTrigger>
-                                                                <DataTrigger Binding="{Binding IsAllTabsClosed, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:TabControlExt}}}" Value="True">     
-                                                                    <Setter Property="Visibility" TargetName="PART_MenuButton" Value="Hidden"/>
-                                                                    <Setter Property="Height" TargetName="BottomBorder" Value="0"/>
-                                                                </DataTrigger>
-                                                            </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Setter.Value>
                                                 </Setter>
@@ -305,7 +279,7 @@
                                                                                             </ToggleButton.Template>
                                                                                         </ToggleButton>
                                                                                     </DockPanel>
-                                                                                    <Border x:Name="PART_HorizContainerBorder" HorizontalAlignment="Left">
+                                                                                    <Border x:Name="PART_HorizContainerBorder" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                                                         <Border x:Name="ResizedOptionLine" BorderBrush="Gray" BorderThickness="0,1" HorizontalAlignment="Center" Height="4" Width="40"/>
                                                                                     </Border>
                                                                                 </syncfusion:SplitHeaderPanel>
@@ -331,14 +305,24 @@
                                                                                         <RotateTransform Angle="90"/>
                                                                                     </Setter.Value>
                                                                                 </Setter>
-                                                                                <Setter Property="BorderBrush" TargetName="PART_VerticalButton" Value="#FF3E89F9"/>
-                                                                                <Setter Property="BorderBrush" TargetName="PART_HorizontalButton" Value="Transparent"/>
                                                                                 <Setter Property="LayoutTransform" TargetName="PART_HorizontalButton">
                                                                                     <Setter.Value>
                                                                                         <RotateTransform Angle="90"/>
                                                                                     </Setter.Value>
                                                                                 </Setter>
+                                                                                <Setter Property="BorderBrush" TargetName="PART_VerticalButton" Value="#FF316AC5"/>
+                                                                                <Setter Property="BorderBrush" TargetName="PART_HorizontalButton" Value="Transparent"/>
                                                                             </Trigger>
+                                                                            <Trigger Property="ResizeDirection" Value="Rows">
+                                                                                <Setter Property="BorderBrush" TargetName="PART_HorizontalButton" Value="#FF316AC5"/>
+                                                                                <Setter Property="BorderBrush" TargetName="PART_VerticalButton" Value="Transparent"/>
+                                                                            </Trigger>
+                                                                            <DataTrigger Binding="{Binding BottomPanelHeight, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:TabSplitter}}}" Value="0">
+                                                                                <Setter Property="BorderBrush" TargetName="PART_HorizontalButton" Value="Transparent"/>
+                                                                            </DataTrigger>
+                                                                            <DataTrigger Binding="{Binding RightPanelWidth, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type syncfusion:TabSplitter}}}" Value="0">
+                                                                                <Setter Property="BorderBrush" TargetName="PART_VerticalButton" Value="Transparent"/>
+                                                                            </DataTrigger>
                                                                         </ControlTemplate.Triggers>
                                                                     </ControlTemplate>
                                                                 </Setter.Value>
@@ -394,9 +378,9 @@
             </Setter>
             <Setter Property="MouseOverForeground" Value="Black"/>
         </Style>
-    </syncfusion:ChromelessWindow.Resources>
+    </Window.Resources>
     <Grid>
-        <syncfusion:TabSplitter Name="Tabsplit" HideHeaderOnSingleChild="True" Style="{DynamicResource TabSplitterStyle1}">
+        <syncfusion:TabSplitter Name="Tabsplit" Style="{DynamicResource TabSplitterStyle1}">
             <syncfusion:TabSplitterItem Header="tab1">
                 <syncfusion:TabSplitterItem.TopPanelItems>
                     <syncfusion:SplitterPage Header="Split1"></syncfusion:SplitterPage>
@@ -407,4 +391,4 @@
             </syncfusion:TabSplitterItem>
         </syncfusion:TabSplitter>
     </Grid>
-</syncfusion:ChromelessWindow>
+</Window>
