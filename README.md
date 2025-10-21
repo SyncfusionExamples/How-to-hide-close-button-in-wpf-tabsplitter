@@ -1,4 +1,6 @@
 # How-to-hide-the-header-tab-and-close-button-in-wpf-tabsplitter
-This session describes about how to hide the header tab and close button in WPF TabSplitter
-
-KB article - [How-to-hide-the-header-tab-and-close-button-in-wpf-tabsplitter](https://www.syncfusion.com/kb/11572/how-to-hide-the-close-button-in-wpf-tabsplitter)
+In WPF applications, the TabSplitter control from Syncfusion provides a flexible way to organize and manage tabbed content with resizable panels. However, there may be scenarios where you want to simplify the UI by hiding certain elements like the header tab or the close button. This is particularly useful when you want to restrict user interaction or maintain a cleaner interface.
+To hide the header tab, you can modify the style or template of the TabSplitter control to collapse or remove the visual elements associated with the tab headers. This can be done using XAML by targeting the appropriate control template parts.
+Similarly, to hide the close button, you can either set its visibility to Collapsed or customize the control template to exclude it entirely. This ensures that users cannot close the tab panels, which is useful in scenarios where persistent layout is required.
+For a detailed step-by-step guide and code examples, refer to the official Syncfusion Knowledge Base article:
+[How-to-hide-the-header-tab-and-close-button-in-wpf-tabsplitter](https://www.syncfusion.com/kb/11572/how-to-hide-the-close-button-in-wpf-tabsplitter)
