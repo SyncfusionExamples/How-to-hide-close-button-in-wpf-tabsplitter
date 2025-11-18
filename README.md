@@ -1,6 +1,44 @@
-# How-to-hide-the-header-tab-and-close-button-in-wpf-tabsplitter
-In WPF applications, the TabSplitter control from Syncfusion provides a flexible way to organize and manage tabbed content with resizable panels. However, there may be scenarios where you want to simplify the UI by hiding certain elements like the header tab or the close button. This is particularly useful when you want to restrict user interaction or maintain a cleaner interface.
-To hide the header tab, you can modify the style or template of the TabSplitter control to collapse or remove the visual elements associated with the tab headers. This can be done using XAML by targeting the appropriate control template parts.
-Similarly, to hide the close button, you can either set its visibility to Collapsed or customize the control template to exclude it entirely. This ensures that users cannot close the tab panels, which is useful in scenarios where persistent layout is required.
-For a detailed step-by-step guide and code examples, refer to the official Syncfusion Knowledge Base article:
-[How-to-hide-the-header-tab-and-close-button-in-wpf-tabsplitter](https://www.syncfusion.com/kb/11572/how-to-hide-the-close-button-in-wpf-tabsplitter)
+# How to Hide the Close Button in WPF TabSplitter
+The TabSplitter control from Syncfusion allows you to organize tabbed content with resizable panels. In some scenarios, you may want to simplify the UI by hiding elements like the the close button or header tab. This is useful for restricting user interaction or maintaining a cleaner interface.
+
+## Steps to Hide the Close Button
+To hide the close button on the top-right corner of the TabSplitter:
+
+1. Right-click the TabSplitter control in the MainWindow designer.
+2. Select **Edit Template → Edit a Copy**.
+3. A style for the TabSplitter control will be created in MainWindow.xaml.
+4. Locate the ToggleButton named PART_CloseButton and set its Visibility to Collapsed.
+
+## XAML Example
+```XAML
+<Window.Resources>
+  <Style x:Key="TabSplitterStyle1" TargetType="{x:Type syncfusion:TabSplitter}">
+    <Setter Property="Template">
+      ...
+      <ToggleButton x:Name="PART_CloseButton" Visibility="Collapsed">
+        ...
+      </ToggleButton>
+      ...
+    </Setter>
+  </Style>
+</Window.Resources>
+
+<Grid>
+  <syncfusion:TabSplitter Name="Tabsplit" HideHeaderOnSingleChild="True" Style="{DynamicResource TabSplitterStyle1}">
+    <syncfusion:TabSplitterItem Header="tab1">
+      <syncfusion:TabSplitterItem.TopPanelItems>
+        <syncfusion:SplitterPage Header="Split1"/>
+      </syncfusion:TabSplitterItem.TopPanelItems>
+      <syncfusion:TabSplitterItem.BottomPanelItems>
+        <syncfusion:SplitterPage Header="Split2"/>
+      </syncfusion:TabSplitterItem.BottomPanelItems>
+    </syncfusion:TabSplitterItem>
+  </syncfusion:TabSplitter>
+</Grid>
+```
+## Notes
+- Customizing templates requires familiarity with WPF styles and control templates.
+- Ensure you apply the style to the TabSplitter instance using Style="{DynamicResource TabSplitterStyle1}".
+
+## Reference
+- For a detailed step-by-step guide and additional examples, refer to the official Syncfusion Knowledge Base: https://www.syncfusion.com/kb/11572/how-to-hide-the-close-button-in-wpf-tabsplitter
